@@ -20,6 +20,7 @@ class insta_user():
         self.__password = password
         
     def login_user(self, username, password):
+        #This method logs in a user and the boolean value of login becomes True
         self.login = True
         
 class insta_post(insta_user):
@@ -30,6 +31,7 @@ class insta_post(insta_user):
         self.likes = []
         
     def add_post(self,Username,post_name):
+        #This method creats a new post
         self.post_name = post_name
         self.uname = Username
         
@@ -38,6 +40,8 @@ obj_list=[]
 while True:
     ip=input("\nChoice:   ")
     if ip=="1":
+        #Takes in UserName and Password and creates an object "obj" and adds it to obj_list
+        #Here obj_list keeps track of the list of all the instagram users
         username=input("Enter UserName: ")
         password=input("Enter Password: ")
         obj=insta_user()
@@ -45,6 +49,8 @@ while True:
         obj_list.append(obj)
         
     elif ip=="2":
+        #Takes in UserName and Password if that matches with any user in obj_list, it initiates their login value to True
+        #If user not found it prints a message
         done=0
         Username=input("Enter UserName: ")
         Password=input("Enter Password: ")
@@ -57,6 +63,9 @@ while True:
             print("Login failed.Please try again!!")
                 
     elif ip=="3":
+        #Takes in Username and Post_name
+        #If user is logged in then it saves the post to user's profile, user's feed and his followers feed(stack).
+        #Else it prints error message.
         done=0
         Username=input("Enter UserName: ")
         Post_name=input("Enter Postname: ")
@@ -80,6 +89,12 @@ while True:
             print("User not found")
             
     elif ip=="4":
+        #Takes in YourUsnm(The person who opened instagram to see it)
+        #Takes in pstUsnm(The name of the person who posted the post)
+        #Takes in Post_name
+        #If the user with YourUsnm is logged in it serches for a person with pstUsnm and a post with Post_name belonging to pstUsnm
+        #If it is found, then YourUsnm likes the the post(Post_name) of pstUsnm and YourUsnm is added to the likes[] of that post.
+        #Else it prints error message.
         getme=0
         getpu=0
         getp=0
@@ -114,6 +129,10 @@ while True:
             print("your username is wrong.Please try again")
             
     elif ip=="5":
+        #Takes in User1 and User2 as input
+        #If User1 is logged in then if User2 is present in obj_list then User1 can view the profile of User2
+        #Here the profile consists of Name, list of followers, list of following members and its posts showing whether User1 liked a post or not along with the total number of likes.
+        #Else it prints an error message
         u1p=0
         u2p=0
         User1=input("Enter your UserName: ")
@@ -149,6 +168,11 @@ while True:
             print("Please login with correct details..")
     
     elif ip=='6':
+        #Takes in User1 and User2
+        #If User1 is logged in and User2 is an valid account then User1 follows User2
+        #The above is indicated by adding User1 to follower list of User2
+        #and also adds User2 to the following list of User1
+        #Else it prints error message.
         u1p=0
         u2p=0
         User1=input("Enter your UserName: ")
@@ -171,6 +195,9 @@ while True:
             print("Please login with correct details..")
                     
     elif ip=="7":
+        #Takes in User1 as input and if he is logged in it presents the feed of User1 and clears the feed(stack)
+        #This greatly optimizes the space and time and he can view any posts of a person using choice value as 5.
+        #Else it prints error message.
         u1p=0
         User1=input("Enter your UserName: ")
         for index, item in enumerate(obj_list):
@@ -184,6 +211,8 @@ while True:
                     print("UserName: ",fp.uname,"    PostName: ",fp.post_name,"      liked: Yes    total likes: ",len(fp.likes))
                 else:
                     print("UserName: ",fp.uname,"    PostName: ",fp.post_name,"      liked: No     total likes: ",len(fp.likes))
+        else:
+            print("Please login with correct details")
         
     else:
         break
